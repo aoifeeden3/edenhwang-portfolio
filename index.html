@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eden Hwang — edenhwang.com</title>
+<meta name="description" content="Marketing portfolio of Eden Hwang: brand content, campaign execution, and bilingual (KR/EN) copywriting for Porsche Korea, Better Buy, and Give Orange.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   Derived from a strawberry-chocolate confectionery box:
+   candy red, milk cream, cocoa ink, blush pink, lucky-star gold.
+   ============================================================ */
+:root{
+  --cream:      #FFF7F1;
+  --cream-deep: #FDEDE3;
+  --berry:      #E4262B;
+  --berry-deep: #B01722;
+  --blush:      #F9C2CE;
+  --blush-pale: #FDE4E9;
+  --cocoa:      #4A2E20;
+  --cocoa-mid:  #8A5A3B;
+  --lucky:      #EFC24A;
+  --leaf:       #4FA96B;
+
+  --ink: var(--cocoa);
+  --line: 3px;
+  --r-lg: 30px;
+  --r-md: 20px;
+
+  --display: "Baloo 2", "Trebuchet MS", "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+  --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --pad: clamp(20px, 5vw, 64px);
+  --maxw: 1120px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(16px,1.05vw,17px);
+  line-height:1.65;
+  overflow-x:hidden;
+  /* seed-dot texture, like the printed field of berries on the box */
+  background-image:radial-gradient(var(--blush-pale) 1.6px, transparent 1.7px);
+  background-size:26px 26px;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+
+h1,h2,h3,.display{
+  font-family:var(--display);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-0.01em;
+  margin:0;
+}
+
+p{ margin:0 0 1em; max-width:64ch; }
+
+:focus-visible{
+  outline:3px solid var(--cocoa);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+.panel, .section, [id]{ scroll-margin-top:88px; }
+
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad); }
+
+/* ---------- scroll progress: a filling candy stripe ---------- */
+.progress{
+  position:fixed; inset:0 auto auto 0; height:6px; width:0;
+  background:linear-gradient(90deg,var(--berry),var(--lucky));
+  z-index:120;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.topbar{
+  position:sticky; top:0; z-index:100;
+  background:var(--berry);
+  color:#fff;
+}
+.topbar::after{ /* scalloped hem, borrowed from the box's die-cut edge */
+  content:""; position:absolute; left:0; right:0; bottom:-13px; height:13px;
+  background-image:radial-gradient(circle at 13px 0, var(--berry) 13px, rgba(0,0,0,0) 13.5px);
+  background-size:26px 26px; background-repeat:repeat-x;
+  pointer-events:none;
+}
+.topbar .wrap{
+  display:flex; align-items:center; gap:18px;
+  min-height:60px; padding-block:10px;
+}
+.brandmark{
+  display:flex; align-items:center; gap:9px;
+  font-family:var(--display); font-weight:800; font-size:1.1rem;
+  text-decoration:none; letter-spacing:.01em;
+}
+.brandmark svg{ width:26px; height:26px; }
+.navlinks{ margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; }
+.navlinks a{
+  text-decoration:none; font-weight:500; font-size:.94rem;
+  padding:7px 13px; border-radius:999px;
+  transition:background .18s ease, transform .18s ease;
+}
+.navlinks a:hover{ background:var(--berry-deep); transform:translateY(-2px); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  padding-top:clamp(56px,9vw,110px);
+  padding-bottom:clamp(48px,7vw,90px);
+  text-align:center;
+  overflow:hidden;
+}
+.skyglow{
+  position:absolute; top:-26%; left:50%; width:min(1040px,165vw); aspect-ratio:1;
+  transform:translate(-50%,0);
+  background:radial-gradient(circle, rgba(249,194,206,.5) 0%, rgba(253,228,233,.3) 40%, rgba(255,247,241,0) 70%);
+  z-index:0; pointer-events:none;
+}
+.shooters{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.shooter{
+  position:absolute; width:var(--s,120px); opacity:0;
+  animation:shoot var(--dur,8s) linear infinite;
+  animation-delay:var(--delay,0s);
+}
+.shooter svg{ width:100%; aspect-ratio:130/70; display:block; }
+.hero .wrap{ position:relative; z-index:2; }
+
+.tagpill{
+  display:inline-flex; align-items:center; gap:8px;
+  background:#fff; border:var(--line) solid var(--cocoa); border-radius:999px;
+  padding:7px 18px 7px 12px; font-weight:700; font-size:.9rem;
+  box-shadow:4px 4px 0 var(--blush);
+}
+.tagpill svg{ width:18px; height:18px; }
+
+.hero h1{
+  font-size:clamp(3.4rem, 14vw, 9rem);
+  margin:.22em 0 .1em;
+  color:var(--berry);
+  -webkit-text-stroke:4px var(--cocoa);
+  paint-order:stroke fill;
+  text-shadow:9px 9px 0 var(--lucky);
+}
+.hero .role{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(1.15rem,3.1vw,1.7rem);
+  color:var(--cocoa-mid);
+  max-width:34ch; margin:0 auto .7em;
+}
+.lede{
+  margin-inline:auto; font-size:clamp(1.02rem,1.6vw,1.16rem);
+  max-width:56ch;
+}
+
+.btnrow{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--display); font-weight:700; font-size:1.02rem;
+  text-decoration:none; cursor:pointer;
+  padding:13px 26px; border-radius:999px;
+  border:var(--line) solid var(--cocoa);
+  background:var(--berry); color:#fff;
+  box-shadow:6px 6px 0 var(--cocoa);
+  transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+.btn:hover{ transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--cocoa); }
+.btn:active{ transform:translate(3px,3px); box-shadow:2px 2px 0 var(--cocoa); }
+.btn--pale{ background:#fff; color:var(--cocoa); }
+.btn svg{ width:20px; height:20px; }
+
+/* the click-for-a-lucky-star moment */
+.btn--lucky{ background:var(--lucky); color:var(--cocoa); }
+.btn--lucky:hover .spin-on-hover{ animation:spin .7s ease; }
+
+
+/* floating motifs */
+.floaties{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.floaty{ position:absolute; width:var(--s,46px); height:var(--s,46px); opacity:.9; }
+.floaty svg{ width:100%; height:100%; }
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{
+  background:var(--cocoa); color:var(--cream);
+  border-block:var(--line) solid var(--cocoa);
+  padding:11px 0; overflow:hidden; white-space:nowrap;
+}
+.ticker__track{ display:inline-flex; gap:0; will-change:transform; animation:slide 26s linear infinite; }
+.ticker span{
+  font-family:var(--display); font-weight:700; font-size:1rem;
+  letter-spacing:.08em; padding-inline:16px; text-transform:uppercase;
+}
+.ticker i{ color:var(--lucky); font-style:normal; }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{ padding-block:clamp(56px,8vw,104px); position:relative; }
+.section--tint{ background:var(--cream-deep); border-block:var(--line) solid var(--cocoa); }
+
+.sechead{ display:flex; align-items:flex-end; gap:18px; flex-wrap:wrap; margin-bottom:34px; }
+.sechead h2{ font-size:clamp(2rem,5.2vw,3.1rem); }
+.sechead p{ margin:0; color:var(--cocoa-mid); max-width:44ch; }
+
+/* ---------- work panels ---------- */
+.panel{
+  position:relative;
+  background:#fff;
+  border:var(--line) solid var(--cocoa);
+  border-radius:var(--r-lg);
+  padding:clamp(24px,3.6vw,42px);
+  box-shadow:12px 12px 0 var(--blush);
+  margin-bottom:clamp(30px,5vw,54px);
+}
+.panel:nth-of-type(even){ box-shadow:12px 12px 0 var(--lucky); }
+.panel__top{ display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+.panel__mark{
+  flex:none; width:62px; height:62px; border-radius:50%;
+  border:var(--line) solid var(--cocoa); background:var(--blush-pale);
+  display:grid; place-items:center;
+}
+.panel__mark svg{ width:34px; height:34px; }
+.panel h3{ font-size:clamp(1.6rem,3.6vw,2.3rem); }
+.panel__role{ font-weight:700; color:var(--berry); margin:2px 0 0; }
+.panel__body{ margin-top:18px; }
+
+.chiprow{ display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:0 0 20px; list-style:none; }
+.chip{
+  border:2px solid var(--cocoa); border-radius:999px; padding:4px 13px;
+  font-size:.86rem; font-weight:500; background:var(--cream);
+}
+
+.grouplabel{
+  font-family:var(--display); font-weight:700; font-size:1.05rem;
+  margin:26px 0 12px; display:flex; align-items:center; gap:9px;
+}
+.grouplabel svg{ width:20px; height:20px; flex:none; }
+
+.postlist{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.postlist--two{ grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); }
+
+.post{
+  display:flex; align-items:center; gap:13px;
+  padding:11px 16px 11px 11px;
+  border:2px solid var(--cocoa); border-radius:999px;
+  background:var(--cream); text-decoration:none;
+  transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+.post:hover{ background:#fff; transform:translate(-3px,-3px); box-shadow:5px 5px 0 var(--berry); }
+.post:hover .post__thumb svg{ animation:bounce .6s ease; }
+.post:active .post__thumb svg{ animation:bounce .6s ease; }
+@media (hover:none){
+  .post:active{ transform:translate(-3px,-3px); box-shadow:5px 5px 0 var(--berry); }
+}
+.post__thumb{
+  flex:none; width:42px; height:42px; border-radius:50%;
+  background:var(--blush-pale); display:grid; place-items:center; overflow:hidden;
+}
+.post__thumb svg{ width:24px; height:24px; }
+.post__thumb img{ width:100%; height:100%; object-fit:cover; }
+.post__txt{ min-width:0; }
+.post__title{ font-weight:700; font-size:.97rem; display:block; line-height:1.3; }
+.post__meta{
+  font-size:.8rem; color:var(--cocoa-mid); line-height:1.35;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.postlist--two .post{ height:100%; }
+.post__go{ margin-left:auto; flex:none; width:22px; height:22px; color:var(--berry); }
+
+.callout{
+  margin-top:24px; padding:16px 20px;
+  border:2px dashed var(--cocoa-mid); border-radius:var(--r-md);
+  background:var(--blush-pale); font-size:.95rem;
+}
+.callout p{ margin:0; }
+
+/* ---------- capability cards ---------- */
+.caps{ list-style:none; margin:0; padding:0; display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+.caps li{
+  background:#fff; border:var(--line) solid var(--cocoa); border-radius:var(--r-md);
+  padding:22px; box-shadow:7px 7px 0 var(--blush);
+}
+.caps h3{ font-size:1.22rem; margin:12px 0 6px; }
+.caps p{ margin:0; font-size:.94rem; }
+.caps svg{ width:36px; height:36px; }
+
+/* ---------- design notes ---------- */
+.notes{ display:grid; gap:clamp(24px,4vw,52px); grid-template-columns:1.15fr .85fr; align-items:start; }
+.swatches{ display:flex; flex-wrap:wrap; gap:12px; margin:0 0 22px; padding:0; list-style:none; }
+.swatch{ text-align:center; font-size:.74rem; font-weight:500; width:76px; }
+.swatch span{
+  display:block; height:60px; border-radius:50%;
+  border:var(--line) solid var(--cocoa); margin-bottom:6px;
+  transition:transform .2s ease;
+}
+.swatch:hover span{ transform:translateY(-6px) rotate(-8deg); }
+.motionlist{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.motionlist li{
+  display:flex; gap:11px; align-items:flex-start;
+  background:#fff; border:2px solid var(--cocoa); border-radius:var(--r-md);
+  padding:12px 15px; font-size:.93rem;
+}
+.motionlist svg{ width:22px; height:22px; flex:none; margin-top:2px; }
+.motionlist b{ font-family:var(--display); }
+
+.notes__lede{ font-size:1.06rem; }
+.rules{ list-style:none; margin:0 0 24px; padding:0; display:grid; gap:12px; }
+.rules li{ position:relative; padding-left:22px; font-size:.95rem; }
+.rules li::before{
+  content:""; position:absolute; left:0; top:.5em; width:11px; height:11px;
+  box-sizing:border-box; border-radius:50%; background:var(--berry); border:2px solid var(--cocoa);
+}
+.rules b{ font-family:var(--display); font-weight:700; }
+
+/* ---------- contact ---------- */
+.contact{ text-align:center; position:relative; }
+.contact h2{ font-size:clamp(2.1rem,6.2vw,3.6rem); color:var(--berry); -webkit-text-stroke:3px var(--cocoa); paint-order:stroke fill; }
+.contactlinks{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:26px; }
+
+.footer{
+  background:var(--cocoa); color:var(--cream-deep);
+  padding-block:34px; font-size:.88rem;
+}
+.footer .wrap{ display:flex; gap:18px; justify-content:space-between; flex-wrap:wrap; align-items:center; }
+.footer p{ margin:0; max-width:52ch; }
+.footer svg{ width:30px; height:30px; }
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+@keyframes slide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@keyframes shoot{
+  0%{ transform:translate3d(0,0,0) scale(.65); opacity:0; }
+  10%{ opacity:1; }
+  72%{ opacity:1; }
+  100%{ transform:translate3d(var(--tx,70vw),var(--ty,23vw),0) scale(1.05); opacity:0; }
+}
+@keyframes spin{ from{ transform:rotate(0); } to{ transform:rotate(360deg); } }
+@keyframes bounce{
+  0%,100%{ transform:translateY(0) scale(1); }
+  30%{ transform:translateY(-7px) scale(1.12); }
+  60%{ transform:translateY(2px) scale(.95); }
+}
+@keyframes drift{
+  0%,100%{ transform:translateY(0) rotate(var(--rot,0deg)) scale(1); }
+  50%{ transform:translateY(-30px) rotate(calc(var(--rot,0deg) + 14deg)) scale(1.06); }
+}
+@keyframes pop{
+  0%{ transform:translate(0,0) scale(.2) rotate(0); opacity:1; }
+  70%{ opacity:1; }
+  100%{ transform:translate(var(--dx),var(--dy)) scale(1) rotate(var(--dr)); opacity:0; }
+}
+
+.floaty{ animation:drift var(--dur,7s) ease-in-out infinite; animation-delay:var(--delay,0s); }
+
+[data-reveal]{ opacity:0; transform:translateY(26px) rotate(var(--tilt,0deg)); }
+[data-reveal].is-in{
+  opacity:1; transform:translateY(0) rotate(0deg);
+  transition:opacity .55s ease, transform .55s cubic-bezier(.22,1.2,.36,1);
+  transition-delay:calc(var(--i,0) * 70ms);
+}
+
+.starpop{ position:fixed; width:34px; height:34px; margin:-17px 0 0 -17px; pointer-events:none; z-index:130; animation:pop 1.1s cubic-bezier(.2,.7,.3,1) forwards; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation:none !important; transition-duration:.01ms !important; }
+  [data-reveal]{ opacity:1; transform:none; }
+  .shooter{ opacity:.85; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:820px){
+  .notes{ grid-template-columns:1fr; }
+  .hero h1{ -webkit-text-stroke-width:3px; text-shadow:6px 6px 0 var(--lucky); }
+  .panel{ box-shadow:8px 8px 0 var(--blush); }
+  .panel:nth-of-type(even){ box-shadow:8px 8px 0 var(--lucky); }
+}
+@media (max-width:560px){
+  .topbar .wrap{ flex-wrap:wrap; justify-content:center; row-gap:4px; }
+  .navlinks{ margin-left:0; width:100%; justify-content:center; }
+  .navlinks a{ padding:5px 10px; font-size:.85rem; }
+  .shooter:nth-of-type(n+3){ display:none; }
+  .floaty{ display:none; }
+  .floaty.keep{ display:block; opacity:.7; }
+  .post{ padding:10px 13px 10px 10px; }
+}
+</style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<!-- ============================================================
+     MOTIF LIBRARY — the box's vocabulary, redrawn as UI icons
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-berry" viewBox="0 0 44 48">
+    <path d="M22 14c9.4 0 15.5 6.2 15.5 13.4C37.5 37 28 44.5 22 46.5 16 44.5 6.5 37 6.5 27.4 6.5 20.2 12.6 14 22 14Z" fill="#E4262B" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <g fill="#FFF7F1"><circle cx="16" cy="25" r="1.7"/><circle cx="27" cy="24" r="1.7"/><circle cx="22" cy="32" r="1.7"/><circle cx="31" cy="32" r="1.7"/><circle cx="13" cy="33" r="1.7"/><circle cx="26" cy="39" r="1.7"/><circle cx="17" cy="40" r="1.7"/></g>
+    <path d="M22 15c-4-6-9-6-13-4 3 3 3 6 2 8 4 1 8 0 11-4Zm0 0c4-6 9-6 13-4-3 3-3 6-2 8-4 1-8 0-11-4Z" fill="#4FA96B" stroke="#4A2E20" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M22 15V5" stroke="#4A2E20" stroke-width="2.8" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="i-cone" viewBox="0 0 44 46">
+    <path d="M22 4 38 38c-10 4.6-22 4.6-32 0L22 4Z" fill="#7A4A2E" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M22 4l7.5 16c-5 2-10 2-15 0L22 4Z" fill="#F9C2CE" stroke="#4A2E20" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M22 8v30M15 22l-3 15M29 22l3 15" stroke="#4A2E20" stroke-width="1.7" stroke-linecap="round" opacity=".55"/>
+  </symbol>
+
+  <symbol id="i-star" viewBox="0 0 44 44">
+    <path d="M22 3.5 27.9 16l13.6 1.9-9.9 9.5 2.4 13.5L22 34.5 10 40.9l2.4-13.5-9.9-9.5L16.1 16 22 3.5Z" fill="#EFC24A" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="i-star-pink" viewBox="0 0 44 44">
+    <path d="M22 3.5 27.9 16l13.6 1.9-9.9 9.5 2.4 13.5L22 34.5 10 40.9l2.4-13.5-9.9-9.5L16.1 16 22 3.5Z" fill="#F9C2CE" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="i-bee" viewBox="0 0 44 44">
+    <ellipse cx="15" cy="15" rx="9" ry="6.5" transform="rotate(-28 15 15)" fill="#FDE4E9" stroke="#4A2E20" stroke-width="2.4"/>
+    <ellipse cx="29" cy="13" rx="9" ry="6.5" transform="rotate(24 29 13)" fill="#FFF7F1" stroke="#4A2E20" stroke-width="2.4"/>
+    <path d="M22 15c6.6 0 11 5.4 11 12S28.6 40 22 40 11 34.6 11 27.5 15.4 15 22 15Z" fill="#EFC24A" stroke="#4A2E20" stroke-width="2.6"/>
+    <path d="M13.2 23.5h17.6M11.6 30h20.8M14.4 36h15.2" stroke="#4A2E20" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M17 10.5 14 5M27 10 30.5 4.6" stroke="#4A2E20" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="13.6" cy="4.2" r="2.4" fill="#E4262B" stroke="#4A2E20" stroke-width="2"/>
+    <circle cx="31.4" cy="3.8" r="2.4" fill="#E4262B" stroke="#4A2E20" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-sprout" viewBox="0 0 44 44">
+    <path d="M22 41V19" stroke="#4A2E20" stroke-width="3" stroke-linecap="round"/>
+    <path d="M21 25c-1.4-8-7.4-11.4-15-11.4.4 8.4 6.6 12.8 15 11.4Z" fill="#4FA96B" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M23 21c1.2-7.6 6.6-11 13.6-11-.4 7.8-6 12-13.6 11Z" fill="#7ACF9C" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M12 41h20" stroke="#4A2E20" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="i-heart" viewBox="0 0 44 44">
+    <path d="M22 39.5C12.6 32.8 4.5 26.6 4.5 18.4 4.5 12.3 9.3 8 14.9 8c3.9 0 6.2 2.1 7.1 3.8.9-1.7 3.2-3.8 7.1-3.8 5.6 0 10.4 4.3 10.4 10.4 0 8.2-8.1 14.4-17.5 21.1Z" fill="#F9C2CE" stroke="#4A2E20" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M13 15.5c-1.6 1.2-2.4 2.8-2.4 4.6" stroke="#FFF7F1" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="i-ball" viewBox="0 0 44 44">
+    <g transform="rotate(-28 22 22)">
+      <ellipse cx="22" cy="22" rx="17" ry="10.5" fill="#E4262B" stroke="#4A2E20" stroke-width="2.6"/>
+      <path d="M14 22h16" stroke="#FFF7F1" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M18 19v6M22 19v6M26 19v6" stroke="#FFF7F1" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M7.5 18.5v7M36.5 18.5v7" stroke="#4A2E20" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-video" viewBox="0 0 44 44">
+    <rect x="3.5" y="10" width="27" height="24" rx="7" fill="#FFF7F1" stroke="#4A2E20" stroke-width="2.6"/>
+    <path d="M33 17.5 40 12v20l-7-5.5v-9Z" fill="#EFC24A" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M14.5 17.5 23 22l-8.5 4.5v-9Z" fill="#E4262B" stroke="#4A2E20" stroke-width="2.2" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="i-shoot" viewBox="0 0 130 70">
+    <path d="M4 18C30 22 52 30 70 40" fill="none" stroke="#EFC24A" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+    <path d="M28 8C48 14 64 24 78 34" fill="none" stroke="#F9C2CE" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+    <use href="#i-star" width="46" height="46" transform="translate(70,18)"/>
+  </symbol>
+
+  <symbol id="i-arrow" viewBox="0 0 24 24">
+    <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="i-camera" viewBox="0 0 44 44">
+    <rect x="4" y="12" width="36" height="27" rx="7" fill="#F9C2CE" stroke="#4A2E20" stroke-width="2.6"/>
+    <circle cx="22" cy="25" r="8" fill="#FFF7F1" stroke="#4A2E20" stroke-width="2.6"/>
+    <path d="M15 12l3-6h8l3 6" fill="#E4262B" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="i-pen" viewBox="0 0 44 44">
+    <path d="M8 36l2-8L28 10l6 6-18 18-8 2Z" fill="#EFC24A" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M27 11l6 6" stroke="#4A2E20" stroke-width="2.6"/>
+    <path d="M10 28l6 6" stroke="#4A2E20" stroke-width="2.2"/>
+  </symbol>
+
+  <symbol id="i-chat" viewBox="0 0 44 44">
+    <path d="M6 12a6 6 0 0 1 6-6h20a6 6 0 0 1 6 6v13a6 6 0 0 1-6 6H19l-9 7v-7a4 4 0 0 1-4-4V12Z" fill="#FFF7F1" stroke="#4A2E20" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle cx="16" cy="19" r="2.4" fill="#E4262B"/><circle cx="23" cy="19" r="2.4" fill="#E4262B"/><circle cx="30" cy="19" r="2.4" fill="#E4262B"/>
+  </symbol>
+
+  <symbol id="i-clip" viewBox="0 0 44 44">
+    <rect x="9" y="5" width="26" height="34" rx="5" fill="#FFF7F1" stroke="#4A2E20" stroke-width="2.6"/>
+    <path d="M15 15h14M15 22h14M15 29h8" stroke="#E4262B" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============================== NAV ============================== -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brandmark" href="#top">
+      <svg aria-hidden="true"><use href="#i-star"/></svg>
+      edenhwang.com
+    </a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#porsche">Porsche</a>
+      <a href="#betterbuy">Better Buy</a>
+      <a href="#giveorange">Give Orange</a>
+      <a href="#skills">What I do</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<main id="top">
+<section class="hero">
+  <div class="skyglow" aria-hidden="true"></div>
+
+  <div class="shooters" aria-hidden="true">
+    <div class="shooter" style="--s:155px;--tx:78vw;--ty:26vw;--dur:7.5s;--delay:.3s;left:-14%;top:9%"><svg><use href="#i-shoot"/></svg></div>
+    <div class="shooter" style="--s:105px;--tx:88vw;--ty:29vw;--dur:9.5s;--delay:2.6s;left:-18%;top:44%"><svg><use href="#i-shoot"/></svg></div>
+    <div class="shooter" style="--s:88px;--tx:58vw;--ty:19vw;--dur:8.5s;--delay:5s;left:14%;top:-10%"><svg><use href="#i-shoot"/></svg></div>
+    <div class="shooter" style="--s:125px;--tx:46vw;--ty:15vw;--dur:11s;--delay:1.4s;left:50%;top:-14%"><svg><use href="#i-shoot"/></svg></div>
+    <div class="shooter" style="--s:78px;--tx:72vw;--ty:24vw;--dur:12s;--delay:6.4s;left:-10%;top:72%"><svg><use href="#i-shoot"/></svg></div>
+  </div>
+
+  <div class="floaties" aria-hidden="true">
+    <div class="floaty keep" style="--s:54px;--rot:-12deg;--dur:8s;--delay:.2s;left:6%;top:16%"><svg><use href="#i-berry"/></svg></div>
+    <div class="floaty" style="--s:40px;--rot:14deg;--dur:6.4s;--delay:.9s;left:16%;top:58%"><svg><use href="#i-star"/></svg></div>
+    <div class="floaty" style="--s:46px;--rot:8deg;--dur:7.4s;--delay:.4s;left:88%;top:22%"><svg><use href="#i-cone"/></svg></div>
+    <div class="floaty keep" style="--s:50px;--rot:-8deg;--dur:9s;--delay:1.2s;left:80%;top:64%"><svg><use href="#i-berry"/></svg></div>
+    <div class="floaty" style="--s:34px;--rot:20deg;--dur:6.8s;--delay:.7s;left:46%;top:6%"><svg><use href="#i-star-pink"/></svg></div>
+    <div class="floaty" style="--s:36px;--rot:-16deg;--dur:7.8s;--delay:1.6s;left:30%;top:80%"><svg><use href="#i-cone"/></svg></div>
+    <div class="floaty" style="--s:38px;--rot:10deg;--dur:6.2s;--delay:2s;left:64%;top:84%"><svg><use href="#i-bee"/></svg></div>
+  </div>
+
+  <div class="wrap">
+    <h1 data-reveal style="--i:0">Eden Hwang</h1>
+
+    <p class="role" data-reveal style="--i:1">Brand content, campaign execution, and audience insight</p>
+
+    <p class="lede" data-reveal style="--i:2">
+      I turn a brief into content people stop for, whether that brief is a 911 track day,
+      a children's concert, or a snack campaign. I plan the calendar, make the work, write it
+      in Korean and English, and publish it on LinkedIn, Instagram, and TikTok.
+    </p>
+
+    <div class="btnrow" data-reveal style="--i:3">
+      <a class="btn" href="#work">See the work <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <button class="btn btn--lucky" id="luckyBtn" type="button">
+        <svg class="spin-on-hover" aria-hidden="true"><use href="#i-star"/></svg>
+        <span id="luckyLabel">Shake for a lucky star</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================== TICKER ============================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="ticker">
+    <span>Content planning <i>★</i> Shoot direction <i>★</i> Art direction <i>★</i> Bilingual copywriting <i>★</i> Launch campaigns <i>★</i> CSR storytelling <i>★</i></span>
+    <span>Content planning <i>★</i> Shoot direction <i>★</i> Art direction <i>★</i> Bilingual copywriting <i>★</i> Launch campaigns <i>★</i> CSR storytelling <i>★</i></span>
+  </div>
+</div>
+
+<!-- ============================== WORK ============================== -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sechead" data-reveal>
+      <h2>Selected work</h2>
+      <p>Three brands, three very different audiences. Every link below opens the live post.</p>
+    </div>
+
+    <!-- ---------- PORSCHE ---------- -->
+    <article class="panel" id="porsche" data-reveal>
+      <div class="panel__top">
+        <div class="panel__mark"><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+        <div>
+          <h3>Porsche Korea</h3>
+          <p class="panel__role">Bilingual LinkedIn content, planning to publishing</p>
+        </div>
+      </div>
+
+      <div class="panel__body">
+        <p>
+          I wrote and published bilingual posts for Porsche Korea's LinkedIn page, covering
+          model launches, track events, quarterly results, and the Porsche Do Dream social
+          contribution program. Each post ran in Korean and English side by side, matched to
+          global brand language and approved locally before upload.
+        </p>
+        <ul class="chiprow">
+          <li class="chip">Bilingual copy, KR and EN</li>
+          <li class="chip">Editorial calendar</li>
+          <li class="chip">Brand and legal review</li>
+          <li class="chip">Hashtag strategy</li>
+        </ul>
+
+        <p class="grouplabel"><svg aria-hidden="true"><use href="#i-clip"/></svg> LinkedIn posts I wrote and published</p>
+        <ul class="postlist postlist--two">
+          <li><a class="post" href="https://drive.google.com/file/d/1yTFYNZw_uVVttI9RKIvvJpdUqtlWFZin/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-cone"/></svg></span>
+            <span class="post__txt"><span class="post__title">The New 911 GTS Media Track Experience</span><span class="post__meta">Aug 2025 · Track event recap</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://drive.google.com/file/d/13qsQfwRe6qijVpiUkd2P2G2Kdyx6cIzM/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-star-pink"/></svg></span>
+            <span class="post__txt"><span class="post__title">2025 Dream Up Concert</span><span class="post__meta">Aug 2025 · CSR concert recap</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://drive.google.com/file/d/1aQvWTeD3lkmZ1csjsUw_b3uhonLnEPIi/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb" style="background:#FDF1D6"><svg aria-hidden="true"><use href="#i-bee"/></svg></span>
+            <span class="post__txt"><span class="post__title">Bee'lieve in Dreams Park gardening day</span><span class="post__meta">Sep 2025 · Employee volunteering</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://drive.google.com/file/d/1S5oXWSik3RCfhiDuiKpFjLIbgOIhz1bt/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-clip"/></svg></span>
+            <span class="post__txt"><span class="post__title">Porsche AG third quarter 2025 results</span><span class="post__meta">Oct 2025 · Localized for Korea</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://drive.google.com/file/d/1wnez5e9DoNoPoFIyiukeO-yjgz63FjZ5/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <span class="post__txt"><span class="post__title">2025 Porsche Dream Circle, two new schools</span><span class="post__meta">Oct 2025 · CSR program milestone</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+        </ul>
+
+      </div>
+    </article>
+
+    <!-- ---------- BETTER BUY ---------- -->
+    <article class="panel" id="betterbuy" data-reveal>
+      <div class="panel__top">
+        <div class="panel__mark" style="background:#E4F4E9"><svg aria-hidden="true"><use href="#i-sprout"/></svg></div>
+        <div>
+          <h3>Better Buy</h3>
+          <p class="panel__role">Instagram and TikTok content planning, filming, and design</p>
+        </div>
+      </div>
+
+      <div class="panel__body">
+        <p>
+          Better Buy is a browser extension that grades products while you shop, so most of the
+          work was explaining what the tool sees. End to end social content: I planned what each
+          post needed to say, made the assets,
+          and designed the final layout. That ran from static feed graphics to short form video
+          I filmed and edited myself, which kept the brand looking the same in the grid and on
+          the For You page.
+        </p>
+        <ul class="chiprow">
+          <li class="chip">Content planning</li>
+          <li class="chip">Short form video, filming and editing</li>
+          <li class="chip">Graphic design</li>
+          <li class="chip">Caption writing</li>
+        </ul>
+
+        <ul class="postlist postlist--two">
+          <li><a class="post" href="https://www.instagram.com/p/DVttLfOD_SZ/" target="_blank" rel="noopener">
+            <span class="post__thumb" style="background:#FDF1D6"><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+            <span class="post__txt"><span class="post__title">“Better” Simon, Better Buy</span><span class="post__meta">Why the founder built it</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DUtjn2mkqYE/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>
+            <span class="post__txt"><span class="post__title">Valentine’s Day gift guide</span><span class="post__meta">Better gifts, better choices</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DUmAJeiktNz/?img_index=2" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-ball"/></svg></span>
+            <span class="post__txt"><span class="post__title">Super Bowl ads, graded</span><span class="post__meta">Better Buy grades on game day</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://drive.google.com/file/d/1oeMFOlmm3mbKUXKEXr69R5YY2XyQvipa/view?usp=drive_link" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-video"/></svg></span>
+            <span class="post__txt"><span class="post__title">My skincare routine, graded</span><span class="post__meta">Filmed for TikTok and Reels</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ---------- GIVE ORANGE ---------- -->
+    <article class="panel" id="giveorange" data-reveal>
+      <div class="panel__top">
+        <div class="panel__mark"><svg aria-hidden="true"><use href="#i-pen"/></svg></div>
+        <div>
+          <h3>Give Orange</h3>
+          <p class="panel__role">"The GIVO-ing Tree" campaign concept and design</p>
+        </div>
+      </div>
+
+      <div class="panel__body">
+        <p>
+          Give Orange is a student founded nonprofit that counts donors rather than dollars,
+          so the goal was never one large gift but many small ones. An eight part Instagram
+          rollout for The GIVO-ing Tree, its 22nd project, run with the NGO Beautifull Learning. I built the arc so each post did one job:
+          introduce the partner, show what they do in Korea and then worldwide, open a micro
+          donation drive framed as a little library, and drive students to campus fundraisers.
+          I developed the concept, wrote the series, and designed every frame, closing with a
+          collaboration reel made with Moonoh Market.
+        </p>
+        <ul class="chiprow">
+          <li class="chip">Campaign concept</li>
+          <li class="chip">Series planning</li>
+          <li class="chip">Illustration and layout</li>
+          <li class="chip">Brand collaboration</li>
+        </ul>
+
+        <ul class="postlist postlist--two">
+          <li><a class="post" href="https://www.instagram.com/p/DGHEbWHSGP-/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-sprout"/></svg></span>
+            <span class="post__txt"><span class="post__title">22nd Project: “The GIVO-ing Tree”</span><span class="post__meta">Campaign launch</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DGth3hAy2VL/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-clip"/></svg></span>
+            <span class="post__txt"><span class="post__title">Meet the partner, Beautifull Learning</span><span class="post__meta">Storybook-style partner intro</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DHRclJPSlDy/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-pen"/></svg></span>
+            <span class="post__txt"><span class="post__title">What Beautifull Learning does in Korea</span><span class="post__meta">Program explainer, Korea</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DHb-515SYe2/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>
+            <span class="post__txt"><span class="post__title">Little library, little donation</span><span class="post__meta">Micro donation drive</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DIcaEyJS4z0/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-star-pink"/></svg></span>
+            <span class="post__txt"><span class="post__title">Beautifull Learning around the world</span><span class="post__meta">Programs worldwide</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DIcxvbeNQgV/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-camera"/></svg></span>
+            <span class="post__txt"><span class="post__title">Undergraduate fundraiser event</span><span class="post__meta">Campus fundraiser event</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/p/DIt2Zc7ODYL/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-cone"/></svg></span>
+            <span class="post__txt"><span class="post__title">Finals week amulets and snacks</span><span class="post__meta">Character merch fundraiser</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+          <li><a class="post" href="https://www.instagram.com/reel/DJFG_3mxWJZ/" target="_blank" rel="noopener">
+            <span class="post__thumb"><svg aria-hidden="true"><use href="#i-video"/></svg></span>
+            <span class="post__txt"><span class="post__title">Moonoh Market collaboration reel</span><span class="post__meta">Short form video</span></span>
+            <svg class="post__go" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a></li>
+        </ul>
+
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================== SKILLS ============================== -->
+<section class="section section--tint" id="skills">
+  <div class="wrap">
+    <div class="sechead" data-reveal>
+      <h2>What I do</h2>
+      <p>How a brief becomes a live campaign, and what I own at each stage.</p>
+    </div>
+
+    <ul class="caps">
+      <li data-reveal style="--i:0">
+        <svg aria-hidden="true"><use href="#i-pen"/></svg>
+        <h3>Plan against the brief</h3>
+        <p>Turn a launch date, an event, or a campaign goal into a calendar where every post has a job and an audience.</p>
+      </li>
+      <li data-reveal style="--i:1">
+        <svg aria-hidden="true"><use href="#i-camera"/></svg>
+        <h3>Make the work</h3>
+        <p>Shoot the stills, film and cut the short form video, then design the layouts and carousels.</p>
+      </li>
+      <li data-reveal style="--i:2">
+        <svg aria-hidden="true"><use href="#i-chat"/></svg>
+        <h3>Write for the audience</h3>
+        <p>Match the voice to who is reading. At Porsche that meant writing every post twice, natively in Korean and English, rather than translating one into the other.</p>
+      </li>
+      <li data-reveal style="--i:3">
+        <svg aria-hidden="true"><use href="#i-clip"/></svg>
+        <h3>Ship it, then read it</h3>
+        <p>Route drafts through brand and legal review, publish on schedule, then look at what landed and carry it into the next round.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== DESIGN NOTES ============================== -->
+<section class="section" id="notes">
+  <div class="wrap">
+    <div class="sechead" data-reveal>
+      <h2>Design notes</h2>
+      <p>Why a marketing portfolio looks like a candy box.</p>
+    </div>
+
+    <div class="notes">
+      <div data-reveal>
+        <p class="notes__lede">
+          This site is built from my favorite candy. Meiji Apollo comes in a red box covered in
+          strawberries, with a gold burst on the corner asking whether you got the lucky star
+          inside. I took its grammar, not its picture.
+        </p>
+        <ul class="rules">
+          <li><b>Color, straight off the carton.</b> Red acts, cream holds everything, cocoa brown stands in for black, and one gold is saved for a single reward.</li>
+          <li><b>Heavy line, flat fill.</b> No gradients, no soft shadows. Shadows are hard offsets, like a print run out of register.</li>
+          <li><b>Borrowed shape.</b> The die-cut scallop on the box lid became the hem of the navigation bar.</li>
+          <li><b>Extended, not copied.</b> The box only ever had to draw strawberries. A portfolio needs a bee, a football, a heart, a camcorder, and a sprout, so I drew those to its rules instead of borrowing them.</li>
+        </ul>
+        <ul class="swatches">
+          <li class="swatch"><span style="background:#E4262B"></span>Candy red</li>
+          <li class="swatch"><span style="background:#F9C2CE"></span>Blush</li>
+          <li class="swatch"><span style="background:#FFF7F1"></span>Milk cream</li>
+          <li class="swatch"><span style="background:#4A2E20"></span>Cocoa ink</li>
+          <li class="swatch"><span style="background:#EFC24A"></span>Lucky gold</li>
+        </ul>
+      </div>
+
+      <div data-reveal style="--i:1">
+        <ul class="motionlist">
+          <li><svg aria-hidden="true"><use href="#i-shoot"/></svg><span><b>Streak.</b> Lucky stars shoot across the header on their own timing, trails and all.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-berry"/></svg><span><b>Float.</b> Berries, cones, stars, and a bee drift on their own loops and shift with the page.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-cone"/></svg><span><b>Bounce.</b> Hover a post row and its icon hops, the row lifts, and a hard shadow snaps out.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-star-pink"/></svg><span><b>Burst.</b> Click the button up top and stars scatter. A pink one means you got the lucky star.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section class="section section--tint contact" id="contact">
+  <div class="wrap">
+    <div data-reveal>
+      <h2>Let's make something</h2>
+      <p class="lede">Happy to walk through any of these projects in detail, in English or Korean.</p>
+      <div class="contactlinks">
+        <a class="btn" id="mailBtn" href="mailto:aoifeeden3@gmail.com">aoifeeden3@gmail.com <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <button class="btn btn--pale" id="copyBtn" type="button"><span id="copyLabel">Copy address</span></button>
+        <a class="btn btn--pale" href="https://www.linkedin.com/in/edenjhwang" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>edenhwang.com — Eden Hwang, marketing and social content. Site designed and built as part of this portfolio.</p>
+    <p>Art direction interpreted from retro confectionery packaging. Nothing traced, everything rebuilt.</p>
+    <svg aria-hidden="true"><use href="#i-star"/></svg>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // failsafe: if anything below throws, content must still be readable
+  window.addEventListener("error", function(){
+    document.querySelectorAll("[data-reveal]").forEach(function(el){ el.classList.add("is-in"); });
+  });
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- scroll reveal ---------- */
+  var items = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    items.forEach(function(el){ io.observe(el); });
+  } else {
+    items.forEach(function(el){ el.classList.add("is-in"); });
+  }
+
+  /* ---------- scroll driven: progress bar and motif parallax ---------- */
+  var bar = document.getElementById("progress");
+  var floaties = Array.prototype.slice.call(document.querySelectorAll(".floaty"));
+  var speeds = floaties.map(function(_, i){ return 0.06 + (i % 4) * 0.045; });
+  var ticking = false;
+
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    if (reduce) return;
+    floaties.forEach(function(el, i){
+      el.style.marginTop = (-y * speeds[i]) + "px";
+    });
+  }
+  function requestTick(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(function(){ onScroll(); ticking = false; }); }
+  }
+  window.addEventListener("scroll", requestTick, { passive: true });
+  onScroll();
+
+
+  /* ---------- lucky star burst ---------- */
+  var btn = document.getElementById("luckyBtn");
+  if (btn){
+    btn.addEventListener("click", function(){
+      var r = btn.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var lucky = Math.random() < 0.25;
+      var n = 10;
+      for (var i = 0; i < n; i++){
+        var s = document.createElement("div");
+        s.className = "starpop";
+        var pink = lucky && i === Math.floor(n / 2);
+        s.innerHTML = '<svg viewBox="0 0 44 44" width="34" height="34"><use href="#' + (pink ? "i-star-pink" : "i-star") + '"/></svg>';
+        var ang = (Math.PI * 2 * i) / n + Math.random() * 0.5;
+        var dist = 90 + Math.random() * 130;
+        s.style.left = cx + "px";
+        s.style.top = cy + "px";
+        s.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+        s.style.setProperty("--dy", (Math.sin(ang) * dist - 40) + "px");
+        s.style.setProperty("--dr", (Math.random() * 720 - 360) + "deg");
+        document.body.appendChild(s);
+        (function(node){ setTimeout(function(){ node.remove(); }, 1200); })(s);
+      }
+      var label = document.getElementById("luckyLabel");
+      if (label) label.textContent = lucky ? "You got the lucky star" : "Shake for a lucky star";
+    });
+  }
+
+  /* ---------- copy the email, for anyone without a mail client set up ---------- */
+  var copyBtn = document.getElementById("copyBtn");
+  if (copyBtn){
+    copyBtn.addEventListener("click", function(){
+      var addr = "aoifeeden3@gmail.com";
+      var label = document.getElementById("copyLabel");
+      function done(){ if (label){ label.textContent = "Copied"; setTimeout(function(){ label.textContent = "Copy address"; }, 1800); } }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(addr).then(done, fallback);
+      } else { fallback(); }
+      function fallback(){
+        var t = document.createElement("textarea");
+        t.value = addr; t.setAttribute("readonly","");
+        t.style.position = "fixed"; t.style.top = "-1000px";
+        document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); done(); } catch(e){}
+        document.body.removeChild(t);
+      }
+    });
+  }
+
+  /* ---------- pause the ticker when it is off screen ---------- */
+  var track = document.getElementById("ticker");
+  if (track && "IntersectionObserver" in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        track.style.animationPlayState = e.isIntersecting ? "running" : "paused";
+      });
+    }).observe(track);
+  }
+})();
+</script>
+</body>
+</html>
