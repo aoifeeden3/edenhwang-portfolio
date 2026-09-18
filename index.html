@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eden Hwang — Marketing &amp; Content</title>
+<meta name="description" content="Eden Hwang. Brand content, campaign execution, and audience insight. Porsche Korea, Better Buy, Give Orange Inc., Rollover.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
+<style>
+/* ===============================================================
+   TOKENS
+   Warm cream ground, sage green, dusty terracotta, soft charcoal.
+   A palette pulled from still life painting: every colour has
+   been mixed with white, nothing is fully saturated.
+   =============================================================== */
+:root{
+  --cream:  #F7F3EE;
+  --cream-2:#EDE8E0;
+  --sage:   #7A9B7A;
+  --sage-2: #5C7C5C;
+  --terra:  #C17B5C;
+  --terra-2:#A45E3F;
+  --stone:  #2E2A25;
+  --stone-2:#5A5450;
+  --blush:  #E8D5C8;
+
+  --serif: "Playfair Display", "Georgia", serif;
+  --sans:  "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --pad:   clamp(20px,5vw,72px);
+  --maxw:  1240px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--cream); color:var(--stone);
+  font-family:var(--sans); font-weight:300;
+  font-size:clamp(15.5px,.95vw,17px); line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; line-height:1.06; }
+p{ margin:0 0 1em; max-width:60ch; }
+:focus-visible{ outline:2px solid var(--sage); outline-offset:4px; border-radius:4px; }
+[id]{ scroll-margin-top:80px; }
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad); }
+.eyebrow{ font-family:var(--sans); font-weight:500; font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--stone-2); }
+
+/* progress */
+.progress{ position:fixed; top:0; left:0; height:2px; width:0; background:var(--terra); z-index:200; }
+.progress__dot{
+  position:fixed; top:-3px; left:0; width:8px; height:8px; border-radius:50%;
+  background:var(--terra); z-index:201; transform:translateX(-50%) scale(0);
+  transition:transform .2s ease;
+}
+.progress__dot.is-on{ transform:translateX(-50%) scale(1); }
+
+/* ===============================================================
+   NAV
+   =============================================================== */
+.nav{
+  position:sticky; top:0; z-index:100; background:color-mix(in srgb,var(--cream) 92%,transparent);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--cream-2);
+}
+.nav .wrap{ display:flex; align-items:center; gap:20px; min-height:64px; }
+.nav__name{ font-family:var(--serif); font-size:1.15rem; letter-spacing:.02em; white-space:nowrap; }
+.nav__links{ margin-left:auto; display:flex; gap:6px; position:relative; z-index:1; }
+.nav__links a{
+  font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; font-weight:500;
+  color:var(--stone-2); padding:6px 14px; border-radius:99px;
+  transition:background .2s ease, color .2s ease;
+}
+.nav__links a:hover{ background:var(--sage); color:#fff; }
+
+/* ===============================================================
+   HERO
+   =============================================================== */
+.hero{ padding-block:clamp(56px,10vw,140px) clamp(40px,6vw,80px); position:relative; overflow:hidden; }
+.hero::before{
+  content:""; position:absolute; right:-8%; top:-18%; width:52%; aspect-ratio:1;
+  background:radial-gradient(circle, color-mix(in srgb,var(--blush) 70%,transparent) 0%, transparent 72%);
+  z-index:0; pointer-events:none;
+}
+.hero__glow{
+  position:absolute; width:420px; height:420px; border-radius:50%; z-index:0; pointer-events:none;
+  background:radial-gradient(circle, color-mix(in srgb,var(--sage) 16%,transparent) 0%, transparent 70%);
+  transform:translate(-50%,-50%); opacity:0; transition:opacity .4s ease;
+  left:var(--gx,50%); top:var(--gy,50%);
+}
+.hero:hover .hero__glow{ opacity:1; }
+.hero .wrap{ position:relative; z-index:1; }
+.hero__grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,80px); align-items:stretch; }
+.hero__left{ display:flex; flex-direction:column; justify-content:center; min-width:0; }
+.hero__right{ display:flex; flex-direction:column; justify-content:center; }
+.hero__eyebrow{ margin-bottom:18px; }
+.hero h1{
+  font-size:clamp(3.2rem,7.5vw,6.8rem); font-style:italic; letter-spacing:-.02em;
+  color:var(--stone); text-align:left; margin-left:-.07em;
+}
+.hero h1 span{ font-style:normal; color:var(--sage); }
+
+.hero__right p{ font-size:clamp(1.05rem,1.3vw,1.18rem); }
+.hero__tags{ display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+.tag{
+  font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; font-weight:500;
+  border:1px solid var(--stone-2); border-radius:99px; padding:6px 16px; color:var(--stone-2);
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+.tag:hover{ background:var(--terra); color:#fff; border-color:var(--terra); }
+
+/* ===============================================================
+   TICKER
+   =============================================================== */
+.ticker{ border-block:1px solid var(--cream-2); padding:14px 0; overflow:hidden; white-space:nowrap; margin-block:clamp(28px,5vw,64px); }
+.ticker__track{ display:inline-flex; will-change:transform; }
+.ticker span{ font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--stone-2); padding-inline:0; }
+.ticker i{ font-style:normal; color:var(--terra); margin-inline:.9em; }
+
+/* ===============================================================
+   SECTIONS
+   =============================================================== */
+.section{ padding-block:clamp(48px,7vw,100px); }
+.section--tint{ background:var(--cream-2); }
+.section-label{ display:flex; align-items:baseline; gap:18px; margin-bottom:clamp(32px,4vw,56px); }
+.section-label h2{ font-size:clamp(2rem,4.5vw,3.2rem); position:relative; display:inline-block; }
+.section-label h2::before{
+  content:""; position:absolute; left:-18px; top:.45em; width:8px; height:8px; border-radius:50%;
+  background:var(--terra); transform:scale(0); transition:transform .35s cubic-bezier(.3,1.4,.5,1);
+}
+.section-label:hover h2::before{ transform:scale(1); }
+.section-label .eyebrow{ margin-left:auto; }
+
+/* ===============================================================
+   PROJECTS
+   =============================================================== */
+.project{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(28px,4vw,64px); padding-block:clamp(36px,5vw,64px); border-top:1px solid var(--cream-2); }
+.project:first-of-type{ border-top:none; }
+.project__left{ align-self:start; position:sticky; top:88px; }
+.project__no{
+  font-family:var(--serif); font-size:3.5rem; font-style:italic; color:var(--cream-2); line-height:1; margin-bottom:6px;
+  -webkit-text-stroke:1px var(--stone-2); display:inline-block;
+  transition:transform .4s cubic-bezier(.3,1.4,.5,1), color .4s ease, -webkit-text-stroke-color .4s ease;
+}
+.project__left:hover .project__no{ transform:translateY(-4px); color:var(--blush); -webkit-text-stroke-color:var(--terra); }
+.project__left h3{ font-size:clamp(1.6rem,2.8vw,2.2rem); margin-bottom:4px; }
+.project__role{ color:var(--terra); font-weight:500; font-size:.85rem; margin:0 0 16px; letter-spacing:.04em; }
+.project__left p{ font-size:.95rem; }
+.project__facts{ margin-top:20px; list-style:none; padding:0; }
+.project__facts li{ display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--cream-2); font-size:.8rem; }
+.project__facts span:first-child{ letter-spacing:.12em; text-transform:uppercase; font-size:.68rem; color:var(--stone-2); }
+
+/* tiles */
+.tiles{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(10px,1.4vw,18px); }
+.tile{ display:block; cursor:pointer; }
+.tile__frame{
+  display:block; position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:10px;
+  background:var(--cream-2);
+}
+#betterbuy .tile__frame, #giveorange .tile__frame{ aspect-ratio:4/5; }
+.tile__frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.16,.9,.24,1), filter .4s ease; }
+.tile:hover .tile__frame img{ transform:scale(1.06) rotate(.4deg); filter:brightness(.94); }
+.tile__ph{ display:grid; position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:8px; text-align:center; padding:18px; }
+.tile__ph b{ font-family:var(--serif); font-weight:400; font-style:italic; font-size:1rem; line-height:1.25; }
+.tile__ph span{ font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--stone-2); }
+.tile__frame::after{ content:""; position:absolute; inset:0; border-radius:10px; box-shadow:inset 0 0 0 1px rgba(46,42,37,.08); pointer-events:none; }
+.tile--film .tile__frame::before{
+  content:""; position:absolute; z-index:2; left:50%; top:50%; width:46px; height:46px;
+  transform:translate(-50%,-50%); border-radius:50%; border:2px solid rgba(247,243,238,.8);
+  background:rgba(46,42,37,.36) no-repeat center/12px 14px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'><path d='M1 1l10 6-10 6z' fill='%23F7F3EE'/></svg>");
+  transition:transform .3s ease;
+}
+.tile--film:hover .tile__frame::before{ transform:translate(-50%,-50%) scale(1.1); }
+.tile__cap{ display:block; padding-top:10px; position:relative; }
+.tile__cap b{ font-weight:400; font-size:.88rem; line-height:1.3; display:block; position:relative; padding-bottom:3px; }
+.tile__cap b::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--terra);
+  transform:scaleX(0); transform-origin:left center; transition:transform .4s cubic-bezier(.16,.9,.24,1);
+}
+.tile:hover .tile__cap b::after{ transform:scaleX(1); }
+.tile__cap i{ font-style:normal; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--stone-2); }
+.tile:hover .tile__cap b{ color:var(--terra); }
+
+/* ===============================================================
+   CV
+   =============================================================== */
+.cv{ display:grid; gap:0; }
+.cv__row{ display:grid; grid-template-columns:170px minmax(0,1fr) minmax(0,1.4fr); gap:clamp(14px,3vw,44px); padding-block:22px; border-top:1px solid var(--cream-2); align-items:start; }
+.cv__row:last-child{ border-bottom:1px solid var(--cream-2); }
+.cv__when{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--stone-2); padding-top:4px; }
+.cv__what h3{ font-size:1.1rem; margin-bottom:2px; }
+.cv__what p{ margin:0; font-size:.8rem; color:var(--stone-2); }
+.cv__bullets{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.cv__bullets li{ font-size:.88rem; position:relative; padding-left:16px; }
+.cv__link{ color:var(--terra); border-bottom:1px solid color-mix(in srgb,var(--terra) 40%,transparent); transition:border-color .25s ease; }
+.cv__link:hover{ border-bottom-color:var(--terra); }
+.cv__bullets li::before{ content:""; position:absolute; left:0; top:.72em; width:5px; height:5px; border-radius:50%; background:var(--sage); }
+
+/* ===============================================================
+   PRACTICE
+   =============================================================== */
+.practice-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:clamp(16px,2.4vw,32px); }
+.practice-col h3{ font-size:1rem; letter-spacing:.08em; text-transform:uppercase; font-family:var(--sans); font-weight:500; color:var(--stone-2); margin-bottom:14px; }
+.practice-col ul{ list-style:none; margin:0; padding:0; }
+.practice-col li{ font-size:.9rem; padding:6px 0; border-bottom:1px solid var(--cream-2); }
+
+/* ===============================================================
+   DESIGN NOTE
+   =============================================================== */
+.note{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:clamp(24px,4vw,56px); }
+.note p{ font-size:.94rem; }
+
+/* ===============================================================
+   CONTACT
+   =============================================================== */
+.contact{ text-align:center; padding-block:clamp(56px,9vw,120px); }
+.contact h2{ font-size:clamp(2.2rem,6vw,4.8rem); font-style:italic; margin-bottom:10px; }
+.contact__links{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
+.btn{
+  font-family:var(--sans); font-weight:500; font-size:.84rem; letter-spacing:.12em;
+  text-transform:uppercase; cursor:pointer; display:inline-flex; align-items:center; gap:9px;
+  border:1px solid var(--stone); border-radius:99px; padding:12px 28px;
+  background:transparent; color:var(--stone);
+  transition:background .22s ease, color .22s ease, border-color .22s ease;
+}
+.btn:hover{ background:var(--stone); color:var(--cream); }
+.btn--sage{ border-color:var(--sage); color:var(--sage); }
+.btn--sage:hover{ background:var(--sage); color:#fff; border-color:var(--sage); }
+.btn--terra{ border-color:var(--terra); color:var(--terra); }
+.btn--terra:hover{ background:var(--terra); color:#fff; border-color:var(--terra); }
+
+.foot{ border-top:1px solid var(--cream-2); padding-block:28px; }
+.foot .wrap{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.foot p{ margin:0; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--stone-2); }
+
+/* ===============================================================
+   MOTION
+   =============================================================== */
+[data-reveal]{ opacity:0; transform:translateY(18px); }
+[data-reveal].is-in{ opacity:1; transform:none; transition:opacity .7s ease, transform .7s cubic-bezier(.16,.9,.24,1); transition-delay:calc(var(--i,0)*60ms); }
+@keyframes slide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto;   .hero__glow{ display:none; }
+  .progress__dot{ display:none; }
+}
+  *,*::before,*::after{ animation:none !important; transition-duration:.01ms !important;   .hero__glow{ display:none; }
+  .progress__dot{ display:none; }
+}
+  [data-reveal]{ opacity:1; transform:none;   .hero__glow{ display:none; }
+  .progress__dot{ display:none; }
+}
+  .hero__glow{ display:none; }
+  .progress__dot{ display:none; }
+}
+
+/* ===============================================================
+   RESPONSIVE
+   =============================================================== */
+@media (max-width:960px){
+  .hero__grid{ grid-template-columns:1fr; }
+  .hero__right{ padding-bottom:0; }
+  .project{ grid-template-columns:1fr; }
+  .project__left{ position:static; }
+  .cv__row{ grid-template-columns:1fr; gap:4px; }
+  .cv__when{ padding-top:0; }
+}
+@media (max-width:600px){
+  .nav__links a{ font-size:.68rem; padding:5px 10px; letter-spacing:.1em; }
+  .tiles{ grid-template-columns:1fr 1fr; gap:10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="progress__dot" id="progressDot" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="nav__name" href="#top">Eden Hwang</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#cv">Experience</a>
+      <a href="#practice">Practice</a>
+      <a href="#notes">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__grid">
+      <div class="hero__left">
+        <p class="eyebrow hero__eyebrow" data-reveal>Marketing &amp; content</p>
+        <h1 data-reveal style="--i:1"><span>Eden</span><br><em>Hwang</em></h1>
+      </div>
+      <div class="hero__right" data-reveal style="--i:2">
+        <p>I work on the part of a brand people actually meet: the post, the film, the caption, the campaign that runs for eight weeks and has to hold together. So far that has meant four industries and four very different audiences — luxury automotive for enthusiasts and motoring press, a consumer tech startup for online shoppers, a nonprofit for student donors, and a food service brand for the neighborhood around its first storefront.</p>
+        <p>Increasingly the part I like most is what happens after publishing, when the numbers say something the brief did not.</p>
+        <div class="hero__tags">
+          <span class="tag">Bilingual, KR &amp; EN</span>
+          <span class="tag">LinkedIn · Instagram · TikTok</span>
+          <span class="tag">Google Analytics Certified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="ticker">
+    <span>Content strategy <i>·</i> Art direction <i>·</i> Campaign execution <i>·</i> Bilingual copy <i>·</i> Performance review <i>·</i> Brand storytelling <i>·</i></span>
+    <span>Content strategy <i>·</i> Art direction <i>·</i> Campaign execution <i>·</i> Bilingual copy <i>·</i> Performance review <i>·</i> Brand storytelling <i>·</i></span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-label" data-reveal>
+      <h2>Selected work</h2>
+      <span class="eyebrow">Three brands, 2025–2026</span>
+    </div>
+
+    <!-- PORSCHE -->
+    <article id="porsche">
+      <div class="project">
+        <div class="project__left" data-reveal>
+          <div class="project__no">01</div>
+          <h3>Porsche Korea</h3>
+          <p class="project__role">Public relations intern, Seoul, South Korea</p>
+          <p>I owned the LinkedIn channel end to end: model launches, track events, quarterly results, and the Porsche Do Dream social contribution program. Every post ran in Korean and English side by side, matched to global brand language and cleared locally before upload. I read the engagement data afterwards to work out which formats held attention, and took those findings into the next month's plan.</p>
+          <ul class="project__facts">
+            <li><span>Role</span><span>Copy, publishing, reporting</span></li>
+            <li><span>Channel</span><span>LinkedIn</span></li>
+            <li><span>Images</span><span>Porsche Korea</span></li>
+            <li><span>Year</span><span>2025</span></li>
+          </ul>
+        </div>
+        <div class="tiles" data-reveal style="--i:1">
+          <a class="tile" href="https://lnkd.in/p/gbuRxG5P" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>911 GTS Track Experience</b><span>LinkedIn</span></span><img src="images/porsche-01.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>The New 911 GTS Media Track Experience</b><i>Media event</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/gWfpsetB" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>911 Spirit 70 &amp; GT3</b><span>LinkedIn</span></span><img src="images/porsche-02.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>The New 911 Spirit 70 and the 911 GT3</b><i>Model launch</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/gWxEBRtj" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Dream Up Concert</b><span>LinkedIn</span></span><img src="images/porsche-03.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>2025 Dream Up Concert</b><i>CSR event</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/gvJdJEwH" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Bee&#8217;lieve in Dreams</b><span>LinkedIn</span></span><img src="images/porsche-04.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>&#8220;Bee&#8217;lieve in Dreams&#8211;Park&#8221; Gardening Day</b><i>Volunteering</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/grMNAG4d" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Turbo for Dreams</b><span>LinkedIn</span></span><img src="images/porsche-05.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Porsche Turbo for Dreams &#8211; Football</b><i>CSR program</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/g3gHBKNE" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Q3 2025 Results</b><span>LinkedIn</span></span><img src="images/porsche-06.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Porsche AG Third Quarter Results</b><i>Results</i></span></a>
+          <a class="tile" href="https://lnkd.in/p/gXMP878w" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Dream Circle</b><span>LinkedIn</span></span><img src="images/porsche-07.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>2025 Porsche Dream Circle, Two New Schools</b><i>CSR program</i></span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BETTER BUY -->
+    <article id="betterbuy">
+      <div class="project">
+        <div class="project__left" data-reveal>
+          <div class="project__no">02</div>
+          <h3>Better Buy</h3>
+          <p class="project__role">Marketing intern, New York, NY</p>
+          <p>Better Buy is a browser extension that grades products while you shop, so most of the work was making an invisible product visible. I planned each post, made the assets, and wrote the captions, moving between static feed graphics and short form video I filmed and cut myself.</p>
+          <ul class="project__facts">
+            <li><span>Role</span><span>Concept, film, design</span></li>
+            <li><span>Channel</span><span>Instagram, TikTok</span></li>
+            <li><span>Year</span><span>2026</span></li>
+          </ul>
+        </div>
+        <div class="tiles" data-reveal style="--i:1">
+          <a class="tile" href="https://www.instagram.com/p/DVttLfOD_SZ/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Founder story</b><span>Instagram</span></span><img src="images/betterbuy-01.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>&#8220;Better&#8221; Simon, Better Buy</b><i>Post</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DUtjn2mkqYE/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Gift guide</b><span>Instagram</span></span><img src="images/betterbuy-02.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Valentine&#8217;s Day Gift Guide</b><i>Post</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DUmAJeiktNz/?img_index=2" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Ads graded</b><span>Instagram</span></span><img src="images/betterbuy-03.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Super Bowl Ads, Graded</b><i>Carousel</i></span></a>
+          <a class="tile tile--film" href="https://drive.google.com/file/d/1oeMFOlmm3mbKUXKEXr69R5YY2XyQvipa/view?usp=drive_link" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Skincare routine</b><span>Video</span></span><img src="images/betterbuy-04.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>My Skincare Routine, Graded</b><i>Film</i></span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- GIVE ORANGE -->
+    <article id="giveorange">
+      <div class="project">
+        <div class="project__left" data-reveal>
+          <div class="project__no">03</div>
+          <h3>Give Orange Inc.</h3>
+          <p class="project__role">Marketing assistant, New York, NY</p>
+          <p>Give Orange is a student founded nonprofit that counts donors rather than dollars, so the goal was never one large gift but many small ones. The GIVO-ing Tree, its 22nd project, ran as an eight part sequence with the NGO Beautifull Learning: introduce the partner, show the work in Korea and then worldwide, open a micro donation drive framed as a little library, and move students toward campus fundraisers. I tracked traffic from each post through to the donation page and compared formats against each other, which showed which campaign types and post styles actually moved people to give, and decided what we made next.</p>
+          <ul class="project__facts">
+            <li><span>Role</span><span>Concept, series, design</span></li>
+            <li><span>Channel</span><span>Instagram</span></li>
+            <li><span>Year</span><span>2025</span></li>
+          </ul>
+        </div>
+        <div class="tiles" data-reveal style="--i:1">
+          <a class="tile" href="https://www.instagram.com/p/DGHEbWHSGP-/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>The GIVO-ing Tree</b><span>Launch</span></span><img src="images/giveorange-01.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>22nd Project: &#8220;The GIVO-ing Tree&#8221;</b><i>Campaign launch</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DGth3hAy2VL/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Meet the partner</b><span>Intro</span></span><img src="images/giveorange-02.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Meet the Partner, Beautifull Learning</b><i>Storybook-style intro</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DHRclJPSlDy/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>In Korea</b><span>Explainer</span></span><img src="images/giveorange-03.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>What Beautifull Learning Does in Korea</b><i>Program explainer</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DHb-515SYe2/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Little library</b><span>Donation</span></span><img src="images/giveorange-04.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Little Library, Little Donation</b><i>Micro donation drive</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DIcaEyJS4z0/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Worldwide</b><span>Explainer</span></span><img src="images/giveorange-05.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Beautifull Learning Around the World</b><i>Global explainer</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DIcxvbeNQgV/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Campus fundraiser</b><span>Event</span></span><img src="images/giveorange-06.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Undergraduate Fundraiser Event</b><i>Campus event</i></span></a>
+          <a class="tile" href="https://www.instagram.com/p/DIt2Zc7ODYL/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Finals week</b><span>Merch</span></span><img src="images/giveorange-07.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Finals Week Amulets and Snacks</b><i>Character merch</i></span></a>
+          <a class="tile tile--film" href="https://www.instagram.com/reel/DJFG_3mxWJZ/" target="_blank" rel="noopener"><span class="tile__frame"><span class="tile__ph"><b>Moonoh Market</b><span>Reel</span></span><img src="images/giveorange-08.jpg" alt="" loading="lazy" onerror="this.remove()"></span><span class="tile__cap"><b>Moonoh Market Collaboration Reel</b><i>Short form video</i></span></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section section--tint" id="cv">
+  <div class="wrap">
+    <div class="section-label" data-reveal>
+      <h2>Experience</h2>
+      <span class="eyebrow">2024–present</span>
+    </div>
+    <div class="cv">
+      <div class="cv__row" data-reveal><div class="cv__when">2026 &#183; Self-directed</div><div class="cv__what"><h3>Campaign Timing &amp; Contact Frequency Audit</h3><p>Analytics project &#183; Tableau Public</p></div><ul class="cv__bullets"><li>Analyzed 4,521 real client contacts (UCI Bank Marketing Dataset), finding 31% of outreach hit the lowest-converting month while the best month received under 2% of volume.</li><li>Recommended reallocating spend toward high-converting windows and capping contact frequency past the point where conversion begins declining.</li><li><a class="cv__link" href="https://public.tableau.com/app/profile/eden.hwang/viz/CampaignTimingContactFrequencyAudit/CampaignTimingContactFrequencyAudit" target="_blank" rel="noopener">Tableau dashboard</a> &#183; <a class="cv__link" href="https://aoifeeden3.github.io/campaign-timing-audit/" target="_blank" rel="noopener">Write-up and analysis</a></li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Aug 2026 &#8212; Present</div><div class="cv__what"><h3>Rollover</h3><p>Marketing Assistant &#183; New York, NY</p></div><ul class="cv__bullets"><li>Manage the daily social content calendar across TikTok and Instagram for a kimbap brand moving from food truck to storefront, translating brand storytelling into short form video and visual content.</li><li>Plan and execute in-person activations and events to convert digital audiences into in-store customers for a new storefront.</li><li>Manage B2B catering and group-order client relationships end to end, driving repeat business among campus organizations.</li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Jan &#8212; May 2026</div><div class="cv__what"><h3>Better Buy</h3><p>Marketing Intern &#183; New York, NY</p></div><ul class="cv__bullets"><li>Built content strategy for a product-grading browser extension, growing Instagram roughly 20% (1,400 &#8594; 1,682 followers) through weekly performance review.</li><li>Planned, filmed, and edited short form video and static content end to end, translating an invisible browser tool into a visible brand presence.</li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Aug &#8212; Oct 2025</div><div class="cv__what"><h3>Porsche Korea</h3><p>Public Relations Intern &#183; Seoul, South Korea</p></div><ul class="cv__bullets"><li>Owned LinkedIn end to end &#8212; model launches, events, quarterly results, and the Porsche Do Dream CSR program &#8212; growing followers 12.5% (2,389 &#8594; 2,687) in three months.</li><li>Produced bilingual Korean and English content matched to global brand language, analyzing engagement to shape the following month&#8217;s plan.</li><li>Partnered cross-functionally with marketing, communications, and regional teams to align campaign strategy across global markets.</li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Jun &#8212; Jul 2025</div><div class="cv__what"><h3>Alvarez &amp; Marsal</h3><p>Project Research Assistant &#183; Seoul, South Korea</p></div><ul class="cv__bullets"><li>Developed competitive landscape research across manufacturers, advertisers, and technology vendors, synthesizing findings into market-entry recommendations.</li><li>Analyzed client M&amp;A activity and competitive positioning to support senior consultants&#8217; client-facing reporting.</li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Jan &#8212; May 2025</div><div class="cv__what"><h3>Give Orange Inc.</h3><p>Marketing Assistant &#183; New York, NY</p></div><ul class="cv__bullets"><li>Ran the GIVO-ing Tree campaign, the organization&#8217;s 22nd project: an eight part series with NGO Beautifull Learning that raised &#8361;1.2M (about $815) through micro-donations.</li><li>Tracked traffic from each post through to the donation page, comparing formats to see what actually moved people to give.</li></ul></div>
+
+      <div class="cv__row" data-reveal><div class="cv__when">Jun 2024</div><div class="cv__what"><h3>TS Investment</h3><p>Finance Intern &#183; Seoul, South Korea</p></div><ul class="cv__bullets"><li>Drafted investment memos and market assessments for consumer companies, including the pro forma projections senior staff used to evaluate decisions.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICE -->
+<section class="section" id="practice">
+  <div class="wrap">
+    <div class="section-label" data-reveal><h2>Practice</h2></div>
+    <div class="practice-grid">
+      <div class="practice-col" data-reveal>
+        <h3>Marketing</h3>
+        <ul>
+          <li>Content strategy and planning</li><li>Campaign execution</li>
+          <li>Social and community management</li><li>Brand storytelling</li>
+          <li>Public relations</li><li>Event planning</li>
+        </ul>
+      </div>
+      <div class="practice-col" data-reveal style="--i:1">
+        <h3>Analysis</h3>
+        <ul>
+          <li>Google Analytics Certified</li><li>Tableau</li><li>Performance review</li>
+          <li>Competitive research</li><li>Excel modeling</li>
+          <li>Python, R</li><li>Stakeholder reporting</li>
+        </ul>
+      </div>
+      <div class="practice-col" data-reveal style="--i:2">
+        <h3>Craft</h3>
+        <ul>
+          <li>Film and editing</li><li>Adobe Creative Suite</li>
+          <li>CapCut</li><li>Canva</li>
+          <li>Copywriting, English and Korean</li>
+        </ul>
+      </div>
+      <div class="practice-col" data-reveal style="--i:3">
+        <h3>Education</h3>
+        <ul>
+          <li>New York University</li><li>BA Economics</li>
+          <li>Minors: Business Studies and Studio Art</li>
+          <li>NYU Shanghai, study abroad Summer 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN NOTES -->
+<section class="section section--tint" id="notes">
+  <div class="wrap">
+    <div class="section-label" data-reveal><h2>About the design</h2></div>
+    <div class="note">
+      <div data-reveal>
+        <p>This palette comes from looking at objects at rest: the particular green of a sage leaf, the color of old terracotta, a piece of cream paper left in the sun. Nothing here is fully saturated &#8212; every color has been mixed with a little white, the way a still life painting holds its light.</p>
+        <p>Serif headlines set in italic carry the warmth; a lighter sans underneath keeps the reading calm. The layout leaves room around everything, because the work itself already has color and doesn't need help competing for attention.</p>
+      </div>
+      <div data-reveal style="--i:1">
+        <p>Motion here is quiet on purpose, but not still. A soft light follows the cursor through the header. Numbers lift slightly when you reach them. Titles draw an underline as you hover a piece of work, the way a pencil might trace under a line worth reading twice. The page tracks how far you've read with a thin mark that travels as you scroll.</p>
+        <p>Small gestures, meant to reward attention rather than demand it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <h2 data-reveal>Let&#8217;s make something</h2>
+    <p style="margin-inline:auto" data-reveal style="--i:1">Happy to walk through any of these projects in detail.</p>
+    <div class="contact__links" data-reveal style="--i:2">
+      <a class="btn btn--sage" href="mailto:aoifeeden3@gmail.com">aoifeeden3@gmail.com</a>
+      <button class="btn" id="copyBtn" type="button"><span id="copyLabel">Copy address</span></button>
+      <a class="btn btn--terra" href="https://www.linkedin.com/in/edenjhwang" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Eden Hwang · marketing and social content</p>
+    <p>New York, 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  window.addEventListener("error", function(){ document.querySelectorAll("[data-reveal]").forEach(function(e){ e.classList.add("is-in"); }); });
+
+  var items = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("is-in"); io.unobserve(e.target); } }); }, { threshold:.1, rootMargin:"0px 0px -6% 0px" });
+    items.forEach(function(el){ io.observe(el); });
+  } else { items.forEach(function(el){ el.classList.add("is-in"); }); }
+
+  var bar = document.getElementById("progress"), track = document.getElementById("ticker"), ticking = false;
+  var dot = document.getElementById("progressDot");
+  function frame(){
+    var y = window.scrollY||window.pageYOffset, max = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = max>0 ? (y/max)*100 : 0;
+    bar.style.width = pct+"%";
+    if(dot){
+      dot.style.left = pct+"%";
+      dot.classList.toggle("is-on", y > 40);
+    }
+    if(track && !reduce) track.style.transform = "translateX("+(-(y*.08)%(track.scrollWidth/2))+"px)";
+    ticking=false;
+  }
+  window.addEventListener("scroll", function(){ if(!ticking){ ticking=true; window.requestAnimationFrame(frame); } }, {passive:true});
+  frame();
+
+  if(track && "IntersectionObserver" in window){ new IntersectionObserver(function(entries){ entries.forEach(function(e){ track.style.animationPlayState = e.isIntersecting?"running":"paused"; }); }).observe(track); }
+
+  /* a soft glow that follows the cursor through the hero */
+  var hero = document.querySelector(".hero"), glow = document.getElementById("heroGlow");
+  if(hero && glow && !reduce){
+    hero.addEventListener("mousemove", function(e){
+      var r = hero.getBoundingClientRect();
+      glow.style.setProperty("--gx", (e.clientX - r.left) + "px");
+      glow.style.setProperty("--gy", (e.clientY - r.top) + "px");
+    });
+  }
+
+  /* contact buttons lean very slightly toward the cursor */
+  if(!reduce){
+    document.querySelectorAll(".contact .btn").forEach(function(btn){
+      btn.addEventListener("mousemove", function(e){
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - (r.left+r.width/2)) * .12;
+        var dy = (e.clientY - (r.top+r.height/2)) * .18;
+        btn.style.transform = "translate("+dx+"px,"+dy+"px)";
+      });
+      btn.addEventListener("mouseleave", function(){ btn.style.transform = ""; });
+    });
+  }
+
+  var copyBtn = document.getElementById("copyBtn");
+  if(copyBtn){ copyBtn.addEventListener("click", function(){
+    var addr="aoifeeden3@gmail.com", label=document.getElementById("copyLabel");
+    function done(){ if(label){ label.textContent="Copied"; setTimeout(function(){ label.textContent="Copy address"; }, 1800); } }
+    function fallback(){ var t=document.createElement("textarea"); t.value=addr; t.setAttribute("readonly",""); t.style.position="fixed"; t.style.top="-1000px"; document.body.appendChild(t); t.select(); try{ document.execCommand("copy"); done(); }catch(e){} document.body.removeChild(t); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(addr).then(done,fallback); } else { fallback(); }
+  }); }
+})();
+</script>
+</body>
+</html>
